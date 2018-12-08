@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{# LOADING GIF #}
+<div class="se-pre-con"></div>
+
+<form method="post" action="{% url 'photos:clear_database' %}">
+  {% csrf_token %}
+
+  {# POSTS PAGE PATH FOR REDIRECT BACK TO THIS PAGE #}
+  <input type="hidden" name="train" value="{{ request.path }}">
+
+  <button type="submit" class="btn btn-danger pull-right loading-gif" style="margin: 0 0 10px 10px;">
+    <span class="glyphicon glyphicon-trash"></span> Clear Database
+  </button>
+</form>
+
+<form method="post" action="{% url 'photos:train_model' %}">
+  {% csrf_token %}
+
+  {# POSTS PAGE PATH FOR REDIRECT BACK TO THIS PAGE #}
+  <input type="hidden" name="train" value="{{ request.path }}">
+
+  <button type="submit" class="btn btn-success pull-right loading-gif" style="margin: 0 0 10px 10px;">
+    <span class="glyphicon glyphicon-cloud-upload"></span> Train Model
+  </button>
+</form>
+
+<h1 class="page-header">
+  PFR.AI <small>{% block title %}{% endblock %}</small>
+</h1>
+
+<div class="row" style="margin: 0;">
+  <div class="col-md">
+    {% block photos_content %}{% endblock %}
+  </div>
+</div>
+
+{% endblock %}

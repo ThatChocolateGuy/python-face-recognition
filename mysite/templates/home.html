@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {# LOADING GIF #}
+  <div class="se-pre-con"></div>
+
+  <h1 class="page-header">Train an AI to Recognize People</h1>
+  <p class="lead">Go to <b>'Train Model'</b> in the menu and upload some photos to get started. Once you train a model with some folks, come back here and see if PFR can recognize them!</p>
+  <hr>  
+      
+  <div class="well text-muted text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <div class="row">
+
+      <div class="col-sm">
+      
+        <span class="glyphicon glyphicon-arrow-down" style="font-size: 4rem;"></span>
+        <h3>Drop Photo Here</h3>
+        <h5><i>Does PFR Recognize You?</i></h5>
+        <br>
+        <small><b>Subject Displayed Below</b></small>
+
+        <div class="col-sm text-center" style="padding: 2rem 2rem 0;"">
+          {# PREDICT ACTION #}
+          <form method="post" action="{% url 'photos:predict' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if prediction %}
+              {# HOLDS PREDICTION RESULT & BB PHOTO #}
+              <div style="margin: 1em">
+                <h4 class="{{ textResultColour }}">{{ prediction.result }}</h4>
+                {% if prediction.resultCode != 'no_face' %}
+                  <ul class="list-inline">
+                    <li class="list-inline-item text-primary">{{ predictionSubject }}</li>
+                    <li class="list-inline-item text-warning">Confidence: {{ predictionConfidence }}</li>
+                  </ul>
+                {% endif %}
+              </div>
+              <img type="button" name="" class="btn js-upload-photos well" src="{{ bbPhoto }}" alt="Subject Image" style="padding: 1em; width: 100%; height: auto; max-width: {{ maxWidth }}">
+            {% else %}
+              {# HOLDS SUBJECT PHOTO PLACEHOLDER FOR SUBMISSION #}
+              <img type="button" name="" class="btn js-upload-photos well" src="\static\images\default-placeholder.png" alt="Subject Image" style="padding: 1em; width: 100%; height: auto; max-width: 300px;">
+            {% endif %}
+            
+            {# FORM INPUT TO ATTACH IMAGE URL TO #}
+            <input type="hidden" name="subject" id="subject-image">
+            <br>
+            {# POSTS PAGE PATH FOR REDIRECT BACK TO THIS PAGE #}
+            <input type="hidden" name="home" value="{{ request.path }}">
+            {# BUTTON BEGINS PREDICT ACTION #}
+            <button type="submit" class="btn btn-primary loading-gif" id="predict" style="margin: 10px;">
+              <span class="glyphicon glyphicon-eye-open"></span> Predict
+            </button>            
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <input id="fileupload" type="file" name="file" multiple style="display: none;" data-url="{% url 'photos:progress_bar_upload' %}"
+          data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+
+  </div>
+
+  <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Uploading...</h4>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
