@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn pfr_wsgi:application
+web: gunicorn mysite/pfr_wsgi:application
