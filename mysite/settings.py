@@ -132,6 +132,12 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'mysite/photos/static'),
 )
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR,  'templates'),
+    # Add to this list all the locations containing your static files
+    os.path.join(BASE_DIR,  'photos/templates'),
+)
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
