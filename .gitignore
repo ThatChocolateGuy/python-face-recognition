@@ -90,6 +90,3 @@ ENV/
 
 .DS_Store
 *.sqlite3
-
-# Media Dir
-media/
