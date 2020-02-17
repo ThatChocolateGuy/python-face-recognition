@@ -6,9 +6,9 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
-    url(r'^photos/', include('mysite.photos.urls', namespace='photos')),
+    url(r'^photos/', include(('mysite.photos.urls', 'mysite'), namespace='photos')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+urlpatterns += static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
