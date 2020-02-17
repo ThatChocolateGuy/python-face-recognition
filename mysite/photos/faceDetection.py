@@ -1,4 +1,5 @@
 import Algorithmia
+import os
 
 # Authenticate Algorithmia with API key
 apiKey = "simsX9jEbWI8fgSqUz1+vQ+IvGr1"
@@ -6,6 +7,8 @@ apiKey = "simsX9jEbWI8fgSqUz1+vQ+IvGr1"
 client = Algorithmia.client(apiKey)
 # Path for client directory
 client_dir = "data://ThatChocolateGuy/"
+# Get directory for file manipulation
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 def get_images(image):
@@ -18,7 +21,7 @@ def get_images(image):
     if image_dir.exists() is False:
         image_dir.create()
     # Upload image to client directory
-    client.file(image_file_path).putFile("../../media" + image.file.url)
+    client.file(image_file_path).putFile(dir_path + "../.." + image.file.url)
     # Retrieve images from data collection
     for file in image_dir.list():
         path = file.path.split('_')
