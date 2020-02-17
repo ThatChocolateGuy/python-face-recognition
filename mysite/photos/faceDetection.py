@@ -12,7 +12,7 @@ def get_images(image):
     """Create labeled dataset from data collection."""
     image_dir = client.dir(client_dir + "PFR/")
     image_file_name = image.file.name.split('/')[1]
-    image_file_path = image_dir + image_file_name
+    image_file_path = client_dir + "PFR/" + image_file_name
     images = []
     # Create remote directory (if doesn't exist)
     if image_dir.exists() is False:
