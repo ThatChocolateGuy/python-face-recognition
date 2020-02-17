@@ -21,7 +21,7 @@ def get_images(image):
     if image_dir.exists() is False:
         image_dir.create()
     # Upload image to client directory
-    client.file(image_file_path).putFile(dir_path + "../.." + image.file.url)
+    client.file(image_file_path).putFile(dir_path + "/../.." + image.file.url)
     # Retrieve images from data collection
     for file in image_dir.list():
         path = file.path.split('_')
