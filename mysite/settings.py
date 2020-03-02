@@ -27,9 +27,9 @@ BASE_DIR = public_root
 # SECURITY WARNING: keep the secret keys used in production secret!
 SECRET_KEY = env.str('DJANGO_SECRET_KEY', 'i%06y2q&4l-!nv*8oolv470b!o)!xg*^9f7^d=q10#b$wd%c_e')
 
-ALGORITHMIA_KEY = env.str('ALGO_API_KEY')
+ALGORITHMIA_KEY = env.str('ALGO_API_KEY', 'your_api_key')
 
-TINYFY_KEY = env.str('TINY_API_KEY')
+TINYFY_KEY = env.str('TINY_API_KEY', 'your_api_key')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -186,7 +186,11 @@ MEDIA_ROOT = public_root('media')
 MEDIA_URL = env.str('MEDIA_URL', default='/media/')
 
 STATIC_ROOT = public_root('staticfiles')
+STATIC_TMP = public_root('mysite/static/')
 STATIC_URL = env.str('STATIC_URL', default='/static/')
+
+os.makedirs(STATIC_TMP, exist_ok=True)
+os.makedirs(STATIC_ROOT, exist_ok=True)
 
 STATICFILES_DIRS = [
     public_root('mysite/static/'),
