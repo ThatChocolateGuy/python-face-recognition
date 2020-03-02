@@ -1,6 +1,12 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "*.py", "use": "@now/python", "config": { "maxLambdaSize": "40mb" } }
-  ]
+  "name": "python-face-recognition",
+  "builds": [{
+      "src": "mysite/wsgi.py",
+      "use": "@ardnt/now-python-wsgi",
+      "config": { "maxLambdaSize": "40mb" }
+  }],
+  "routes" : [{
+      "src" : "/(.*)", "dest":"/mysite/wsgi.py"
+  }]
 }
