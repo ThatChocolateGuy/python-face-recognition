@@ -12,7 +12,7 @@
     </div>
     <div class="collapse navbar-collapse" id="main-menu">
       <ul class="nav navbar-nav">
-        <li {% if '/photos/' in request.path %} class="active" {% endif %}>
+        <li {% if '/train-model/' in request.path %} class="active" {% endif %}>
           <a href="{% url 'photos:progress_bar_upload' %}">Train Model</a>
         </li>
       </ul>

@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +10,19 @@
   <title>{% block title %}Python Face Recognition{% endblock %}</title>
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+  <!-- BS modal styling -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'css/modal.css' %}">
   <!-- BS theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+  {% block styles %}
+  {% endblock %}
   <style type="text/css">
     .page-header {
       margin-top: 0;
@@ -28,19 +36,30 @@
     {% block content %}
     {% endblock %}
   </div>
+  {% include 'includes/modal.html' %}
+  
   <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  {% comment %} File Upload Scripts {% endcomment %}
-  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
-  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
-  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
   {# PROGRESS ANIMATION SCRIPT #}
   <script src="{% static 'js/progress-bar-upload.js' %}"></script>
   {# LOADING GIF SCRIPT #}
   <script src="{% static 'js/loading-gif.js' %}"></script>
+
   {% block javascript %}
   {% endblock %}
+
+  {# SHOW UPLOAD SUCCESS MODAL #}
+  {% if uplstatus %}
+    <script>
+    $(function () {
+      $("#myModal").modal('show');
+      $('#home-btn').click(function () {
+        window.location.replace('/');
+      });
+    });
+    </script>
+  {% endif %}
 </body>
 
 </html>
