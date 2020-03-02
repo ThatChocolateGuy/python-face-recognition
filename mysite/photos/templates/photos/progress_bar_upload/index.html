@@ -5,60 +5,60 @@
 {% block title %}Train Model{% endblock %}
 
 {% block javascript %}
-{# JQUERY FILE UPLOAD SCRIPTS #}
-<script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
-<script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
-<script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
 {% endblock %}
 
 {% block photos_content %}
-<div style="margin-bottom: 20px;">
-  {# UPLOAD WELL #}
-  <div type="button" class="btn btn-block js-upload-photos well text-muted text-center" style="padding-top: 4rem; padding-bottom: 4rem; white-space: normal;">
-    <span class="glyphicon glyphicon-arrow-down" style="font-size: 4rem;"></span>
-    <h3 style="width: 100%">Drop Photos Here to Upload</h3>
-    <small>At Least 10 Photos Per Person Required to Successfully Train Model</small><br><br>
-    <small class="text-warning">
-      <b>Filename Format:</b><br>
-      FirstName_LastName_#<br>
-      (e.g. Jon_Wick_1, Jon_Wick_2, ...)
-    </small>
+  <div style="margin-bottom: 20px;">
+    {# UPLOAD WELL #}
+    <div type="button" class="btn btn-block js-upload-photos well text-muted text-center" style="padding-top: 4rem; padding-bottom: 4rem; white-space: normal;">
+      <span class="glyphicon glyphicon-arrow-down" style="font-size: 4rem;"></span>
+      <h3 style="width: 100%">Drop Photos Here to Upload</h3>
+      <small>At Least 10 Photos Per Person Required to Successfully Train Model</small><br><br>
+      <small class="text-warning">
+        <b>Filename Format:</b><br>
+        FirstName_LastName_#<br>
+        (i.e. Jon_Wick_1, Jon_Wick_2, ...)
+      </small>
+    </div>
   </div>
-</div>
 
-<input id="fileupload" type="file" name="file" multiple style="display: none;" data-url="{% url 'photos:progress_bar_upload' %}"
-    data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+  <input id="fileupload" type="file" name="file" multiple style="display: none;" data-url="{% url 'photos:progress_bar_upload' %}"
+      data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
 
-<table id="gallery" class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Photo</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for photo in photos %}
-    <tr>
-      <td>
-        <a href="{{ photo.file.url }}">{{ photo.file.name }} </a>
-        <small> {{ photo.uploaded_at }} </small>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <table id="gallery" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Photo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for photo in photos %}
+      <tr>
+        <td>
+          <a href="{{ photo.file.url }}">{{ photo.file.name }} </a>
+          <small> {{ photo.uploaded_at }} </small>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-<div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Uploading...</h4>
-      </div>
-      <div class="modal-body">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;">0%</div>
+  <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Compressing & Uploading...</h4>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 {% endblock %}

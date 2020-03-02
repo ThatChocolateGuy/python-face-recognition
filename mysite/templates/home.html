@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block javascript %}
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+{% endblock %}
 
 {% block content %}
   {# LOADING GIF #}
@@ -19,7 +27,7 @@
         <br>
         <small><b>Subject Displayed Below</b></small>
 
-        <div class="col-sm text-center" style="padding: 2rem 2rem 0;"">
+        <div class="col-sm text-center" style="padding: 2rem 2rem 0;">
           {# PREDICT ACTION #}
           <form method="post" action="{% url 'photos:predict' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -35,7 +43,7 @@
                   </ul>
                 {% endif %}
               </div>
-              <img type="button" name="" class="btn js-upload-photos well" src="{{ bbPhoto }}" alt="Subject Image" style="padding: 1em; width: 100%; height: auto; max-width: {{ maxWidth }}">
+              <img type="button" name="" class="btn js-upload-photos well" src="{{ bbPhoto }}" alt="Subject Image" style="padding: 1em; width: 100%; height: auto; max-width: 500px;">
             {% else %}
               {# HOLDS SUBJECT PHOTO PLACEHOLDER FOR SUBMISSION #}
               <img type="button" name="" class="btn js-upload-photos well" src="\static\images\default-placeholder.png" alt="Subject Image" style="padding: 1em; width: 100%; height: auto; max-width: 300px;">
@@ -49,25 +57,20 @@
             {# BUTTON BEGINS PREDICT ACTION #}
             <button type="submit" class="btn btn-primary loading-gif" id="predict" style="margin: 10px;">
               <span class="glyphicon glyphicon-eye-open"></span> Predict
-            </button>            
+            </button>
           </form>
-
         </div>
-
       </div>
-
     </div>
-
     <input id="fileupload" type="file" name="file" multiple style="display: none;" data-url="{% url 'photos:progress_bar_upload' %}"
           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
-
   </div>
 
   <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Uploading...</h4>
+          <h4 class="modal-title">Compressing & Uploading...</h4>
         </div>
         <div class="modal-body">
           <div class="progress">
