@@ -37,8 +37,7 @@ DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'python-face-recognition.herokuapp.com',
-    '.now.sh'
+    'python-face-recognition.herokuapp.com'
 ]
 
 
@@ -67,6 +66,7 @@ if DEBUG:
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
 else:
+    public_root = root.path('app/')
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
         # Simplified static file serving. Enable only for production
