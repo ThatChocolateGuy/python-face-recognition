@@ -187,7 +187,7 @@ MEDIA_ROOT = public_root('media')
 MEDIA_URL = env.str('MEDIA_URL', default='/media/')
 
 STATIC_ROOT = public_root('staticfiles')
-STATIC_TMP = public_root('mysite/static/')
+# STATIC_TMP = public_root('mysite/static/')
 STATIC_URL = env.str('STATIC_URL', default='/static/')
 
 # os.makedirs(STATIC_TMP, exist_ok=True)
