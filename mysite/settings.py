@@ -66,7 +66,7 @@ if DEBUG:
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
 else:
-    # public_root = root.path('app/')
+    public_root = root.path('app/')
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
         # Simplified static file serving. Enable only for production
