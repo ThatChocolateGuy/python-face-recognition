@@ -16,7 +16,6 @@ root = environ.Path(__file__) - 3  # get root of the project
 env = environ.Env()
 environ.Env.read_env()  # reading .env file
 public_root = root.path('python-face-recognition/')  # project path
-print(public_root)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # standard approach
@@ -68,6 +67,9 @@ if DEBUG:
     ]
 else:
     public_root = root.path('app/')
+    BASE_DIR = public_root
+    print('BASE_DIR/public_root:\n')
+    print(BASE_DIR)
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
         # Simplified static file serving. Enable only for production
