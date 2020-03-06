@@ -16,6 +16,7 @@ root = environ.Path(__file__) - 3  # get root of the project
 env = environ.Env()
 environ.Env.read_env()  # reading .env file
 public_root = root.path('python-face-recognition/')  # project path
+print(public_root)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # standard approach
@@ -193,6 +194,7 @@ STATIC_URL = env.str('STATIC_URL', default='/static/')
 # os.makedirs(STATIC_TMP, exist_ok=True)
 # os.makedirs(STATIC_ROOT, exist_ok=True)
 
+print(public_root('mysite/static/'))
 STATICFILES_DIRS = [
     public_root('mysite/static/'),
 ]
