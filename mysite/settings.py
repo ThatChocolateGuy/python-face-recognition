@@ -18,8 +18,8 @@ environ.Env.read_env()  # reading .env file
 public_root = root.path('python-face-recognition/')  # project path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # standard approach
-BASE_DIR = public_root
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # standard approach
+# BASE_DIR = public_root
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -56,6 +56,10 @@ INSTALLED_APPS = [
 
 
 if DEBUG:
+    print('\nBASE_DIR/public_root:\n')
+    print(public_root)
+    print(BASE_DIR + '\n')
+
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
@@ -67,9 +71,10 @@ if DEBUG:
     ]
 else:
     public_root = root.path('app/')
-    BASE_DIR = public_root
-    print('BASE_DIR/public_root:\n')
-    print(BASE_DIR)
+    print('\nBASE_DIR/public_root:\n')
+    print(public_root)
+    print(BASE_DIR + '\n')
+
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
         # Simplified static file serving. Enable only for production
@@ -116,6 +121,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
 DATABASES = {'default': env.db('DATABASE_URL', default='sqlite:///db.sqlite3')}
 
 
@@ -196,9 +202,13 @@ STATIC_URL = env.str('STATIC_URL', default='/static/')
 # os.makedirs(STATIC_TMP, exist_ok=True)
 # os.makedirs(STATIC_ROOT, exist_ok=True)
 
+print('STATICFILES_DIRS:\n')
 print(public_root('mysite/static/'))
+print(os.path.join(BASE_DIR, 'mysite/static/')  + '\n')
+
 STATICFILES_DIRS = [
     public_root('mysite/static/'),
+    os.path.join(BASE_DIR, 'mysite/static')
 ]
 
 # Simplified static file serving.
