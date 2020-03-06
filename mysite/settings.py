@@ -37,8 +37,7 @@ DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'python-face-recognition.herokuapp.com',
-    'p-f-r.herokuapp.com/'
+    '.herokuapp.com'
 ]
 
 

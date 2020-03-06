@@ -92,3 +92,4 @@ ENV/
 *.sqlite3
 media
 requirements copy.txt
+3.6.10
